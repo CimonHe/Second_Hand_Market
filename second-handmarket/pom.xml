@@ -45,11 +45,11 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-<!--            <version>0.6.0</version>-->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt</artifactId>-->
+<!--&lt;!&ndash;            <version>0.6.0</version>&ndash;&gt;-->
+<!--        </dependency>-->
 
 
         <dependency>
@@ -113,14 +113,14 @@
             <version>1.2.58</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -132,11 +132,11 @@
             <version>2.3.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -200,41 +200,28 @@
 <!--            <version>2.1.0-GA</version>-->
 <!--        </dependency>-->
 
-        <!--XSS 安全过滤-->
-<!--        <dependency>-->
-<!--            <groupId>net.dreamlu</groupId>-->
-<!--            <artifactId>mica-core</artifactId>-->
-<!--            <version>2.0.9-GA</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>net.dreamlu</groupId>-->
-<!--            <artifactId>mica-xss</artifactId>-->
-<!--            <version>2.0.9-GA</version>-->
-<!--        </dependency>-->
 
+<!--        XSS过滤-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-core</artifactId>
+            <version>2.0.9-GA</version>
         </dependency>
-<!--        &lt;!&ndash; JSR303数据校验支持 &ndash;&gt;-->
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-xss</artifactId>
+            <version>2.0.9-GA</version>
+        </dependency>
+
 <!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-validator</artifactId>-->
-<!--            <version>5.1.0.Final</version>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-validation</artifactId>-->
 <!--        </dependency>-->
-        <!-- validation -->
+        <!-- JSR303数据校验支持 -->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.common-util</groupId>
-            <artifactId>common-util</artifactId>
-            <version>1.0.17</version>
+            <version>5.1.0.Final</version>
         </dependency>
     </dependencies>
 
