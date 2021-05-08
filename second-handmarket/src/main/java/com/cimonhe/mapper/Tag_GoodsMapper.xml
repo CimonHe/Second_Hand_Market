@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.Tag_GoodsMapper">
+
+    <insert id="addTag_Goods" parameterType="Tag_Goods" useGeneratedKeys="true"  keyProperty="id">
+        insert into second_hand_market.tag_goods(tagId, goodsId)
+        values (#{tagId},#{goodsId})
+    </insert>
+
+    <select id="queryByGoodsId" parameterType="int" resultType="tag_Goods">
+        select * from second_hand_market.tag_goods
+        where goodsId =#{goodsId}
+    </select>
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.GoodsMapper">
+
+    <select id="queryByIOSandPS" parameterType="map" resultType="goods">
+        select * from second_hand_market.goods
+        where pendingStatus = #{pendingStatus} and isOnSale = #{isOnSale}
+    </select>
+
+    <select id="queryByInfoLike_IOS_PS" parameterType="map" resultType="goods">
+        select * from second_hand_market.goods
+        where goodsInfo like #{info} and pendingStatus = #{pendingStatus} and isOnSale = #{isOnSale}
+    </select>
+
+    <select id="queryById" parameterType="int" resultType="goods">
+        select distinct * from second_hand_market.goods
+        where id = #{goodsId}
+    </select>
+
+    <select id="queryOnSaleGoodsBySellerId" parameterType="int">
+        select *
+        from second_hand_market.goods
+        where sellerId = #{sellerId} and pendingStatus = 1 and isOnSale = true
+    </select>
+
+    <select id="cntByIOS_PS" parameterType="map" resultType="int">
+        select count(*) from second_hand_market.goods
+        where pendingStatus = #{pendingStatus} and isOnSale = #{isOnSale}
+    </select>
+
+    <select id="cntByInfoLike_IOS_PS" parameterType="map" resultType="int">
+        select count(*) from second_hand_market.goods
+        where goodsInfo like #{info} and pendingStatus = #{pendingStatus} and isOnSale = #{isOnSale}
+    </select>
+
+    <select id="cntByTagId" parameterType="int" resultType="int">
+        select count(*)
+        from second_hand_market.goods,second_hand_market.tag_goods,second_hand_market.tag
+        where tagId = #{tagId} and goods.id = tag_goods.goodsId and tag_goods.tagId = tag.id
+    </select>
+
+    <select id="cntBySellerId" parameterType="int" resultType="int">
+        select count(*)
+        from second_hand_market.goods
+        where sellerId = #{sellerId}
+    </select>
+
+    <select id="cntOnSaleGoodsBySellerId" parameterType="map" resultType="int">
+        select count(*)
+        from second_hand_market.goods
+        where sellerId = #{sellerId} and pendingStatus = 1 and isOnSale = true
+    </select>
+
+    <select id="queryByTagId" parameterType="int" resultType="goods">
+        select goods.id, goodsInfo, price, sellerId, isOnSale, pendingStatus, sellerPhone
+        from second_hand_market.goods,second_hand_market.tag_goods,second_hand_market.tag
+        where tagId = #{tagId} and goods.id = tag_goods.goodsId and tag_goods.tagId = tag.id
+    </select>
+
+    <select id="queryBySellerId" parameterType="int" resultType="goods">
+        select *
+        from second_hand_market.goods
+        where sellerId = #{sellerId}
+    </select>
+
+    <insert id="addGoods" parameterType="goods" useGeneratedKeys="true" keyProperty="id">
+        insert into second_hand_market.goods(goodsInfo, price, sellerId, isOnSale, pendingStatus, sellerPhone)
+        VALUES (#{goodsInfo}, #{price}, #{sellerId}, #{isOnSale}, #{pendingStatus}, #{sellerPhone})
+    </insert>
+
+    <update id="updatePSById" parameterType="map">
+        update second_hand_market.goods
+        set pendingStatus = #{newPS}
+        where id = #{goodsId}
+    </update>
+
+    <update id="updateIOSbyId" parameterType="int">
+        update second_hand_market.goods
+        set isOnSale = false
+        where id = #{id}
+    </update>
+
+    <delete id="deleteIsOnSaleGoodsBySellerId" parameterType="int">
+        delete from second_hand_market.goods
+        where sellerId = #{sellerId} and pendingStatus = 1 and isOnSale = true and id = #{goodsId}
+    </delete>
+
+</mapper>

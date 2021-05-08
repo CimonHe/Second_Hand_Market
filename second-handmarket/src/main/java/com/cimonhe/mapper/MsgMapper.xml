@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.MsgMapper">
+
+    <insert id="addMsg" parameterType="msg">
+        insert into second_hand_market.msg(goodsId, content, date, criticId)
+        VALUES (#{goodsId}, #{content}, #{date}, #{criticId})
+    </insert>
+
+    <select id="queryMsgByGoodsId" parameterType="int" resultType="msg">
+        select * from second_hand_market.msg
+        where goodsId = #{goodsId}
+        order by date desc
+    </select>
+
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.UserMapper">
+
+    <select id="queryAllUser" resultType="user">
+       select * from second_hand_market.user;
+    </select>
+
+    <select id="queryUserByNamePwd" parameterType="map" resultType="user">
+        select * from second_hand_market.user
+        where username = #{username} and password = #{password}
+    </select>
+
+    <select id="queryUserByEmailPwd" parameterType="map" resultType="user">
+        select * from second_hand_market.user
+        where email = #{email} and password = #{password}
+    </select>
+
+    <select id="queryUserById" parameterType="int" resultType="user">
+        select * from second_hand_market.user
+        where id = #{id}
+    </select>
+
+    <select id="queryUserByName" parameterType="String" resultType="user">
+        select * from second_hand_market.user
+        where username = #{username}
+    </select>
+
+    <select id="queryUserByEmail" parameterType="String" resultType="user">
+        select * from second_hand_market.user
+        where email = #{email}
+    </select>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from second_hand_market.user
+        where id = #{id}
+    </delete>
+
+    <update id="incUnqualifiedNumById" parameterType="int">
+        update second_hand_market.user
+        set unqualifiedNum = unqualifiedNum + 1
+        where id = #{id}
+    </update>
+
+    <update id="upGenderById" parameterType="map">
+        update second_hand_market.user
+        set gender = #{gender}
+        where id = #{id}
+    </update>
+
+    <update id="upGradeById" parameterType="map">
+        update second_hand_market.user
+        set grade = #{grade}
+        where id = #{id}
+    </update>
+
+    <update id="upSnoById" parameterType="map">
+        update second_hand_market.user
+        set sno = #{sno}
+        where id = #{id}
+    </update>
+
+    <update id="upAcademyById" parameterType="map">
+        update second_hand_market.user
+        set academy = #{academy}
+        where id = #{id}
+    </update>
+
+    <update id="upMajorById" parameterType="map">
+        update second_hand_market.user
+        set major = #{major}
+        where id = #{id}
+    </update>
+
+    <update id="upIntroductionById" parameterType="map">
+        update second_hand_market.user
+        set introduction = #{introduction}
+        where id = #{id}
+    </update>
+
+    <update id="upPasswordById" parameterType="map">
+        update second_hand_market.user
+        set password = #{password}
+        where id = #{id}
+    </update>
+
+    <update id="upEmailById" parameterType="map">
+        update second_hand_market.user
+        set email = #{email}
+        where id = #{id}
+    </update>
+
+    <update id="upUsernameById" parameterType="map">
+        update second_hand_market.user
+        set username = #{username}
+        where id = #{id}
+    </update>
+
+    <insert id="addUser" parameterType="user">
+        insert into second_hand_market.user(username, password, email, unqualifiedNum, isAdmin)
+        VALUES (#{username}, #{password}, #{email}, #{unqualifiedNum}, #{isAdmin})
+    </insert>
+
+    <select id="queryUserMoreUnqualifiedNum" parameterType="int" resultType="user">
+        select id, username, email, unqualifiedNum, isAdmin from second_hand_market.user
+        where unqualifiedNum >= #{unqualifiedNum}
+    </select>
+
+    <delete id="deleteUserMoreUnqualifiedNum" parameterType="int">
+        delete from second_hand_market.user
+        where unqualifiedNum >= #{unqualifiedNum}
+    </delete>
+</mapper>

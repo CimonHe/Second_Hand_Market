@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.TagMapper">
+
+    <select id="queryTagNameById" parameterType="int" resultType="String">
+        select tagName from second_hand_market.tag
+        where id = #{tagId}
+    </select>
+
+    <select id="queryAllTag" resultType="tag">
+        select * from second_hand_market.tag
+        where isChecked = #{isChecked}
+    </select>
+
+    <select id="queryAllTagByIsChecked" parameterType="boolean" resultType="tag">
+        select * from second_hand_market.tag
+        where isChecked = #{isChecked}
+    </select>
+
+    <insert id="addTag" parameterType="tag">
+        insert into second_hand_market.tag(tagName, isChecked)
+        VALUES (#{tagName},#{isChecked})
+    </insert>
+
+    <update id="upTagIsChecked" parameterType="int">
+        update second_hand_market.tag
+        set isChecked = true
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagById" parameterType="tag">
+        delete from second_hand_market.tag
+        where id = #{id}
+    </delete>
+
+</mapper>

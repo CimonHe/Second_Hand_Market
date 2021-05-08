@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.OrderMapper">
+    
+    <insert id="addOrder" parameterType="order">
+        insert into second_hand_market.`order` (goodsId,deliveryTime,addressId)
+        values (#{goodsId},#{deliveryTime},#{addressId});
+    </insert>
+
+    <select id="queryOrderBySellerId" parameterType="int" resultType="order">
+        select `order`.id, goodsId, deliveryTime, addressId, isReceived
+        from second_hand_market.`order`,second_hand_market.goods
+        where goods.id = goodsId and sellerId = #{sellerId}
+    </select>
+
+    <select id="queryOrderByBuyerId" parameterType="int" resultType="order">
+        select `order`.id, goodsId, deliveryTime, addressId, isReceived,evaluation
+        from second_hand_market.`order`,second_hand_market.addressinfo
+        where addressinfo.id = addressId and userId = #{buyerId}
+    </select>
+
+    <select id="cntOrderBySellerId" parameterType="int" resultType="int">
+        select count(*)
+        from second_hand_market.`order`,second_hand_market.goods
+        where goods.id = goodsId and sellerId = #{sellerId}
+    </select>
+
+    <select id="cntOrderByBuyerId" parameterType="int" resultType="int">
+        select count(*)
+        from second_hand_market.`order`,second_hand_market.addressinfo
+        where addressinfo.id = addressId and userId = #{buyerId}
+    </select>
+
+    <update id="upOrderIsReceivedByIdAndBuyerId" parameterType="map">
+        update second_hand_market.`order`,second_hand_market.addressinfo
+        set `order`.isReceived = true , `order`.evaluation = #{evaluation}
+        where `order`.addressId = addressinfo.id and `order`.id = #{id} and userId = #{buyerId}
+    </update>
+
+</mapper>

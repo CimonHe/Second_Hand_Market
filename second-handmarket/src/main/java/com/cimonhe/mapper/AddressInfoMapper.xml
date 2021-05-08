@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cimonhe.mapper.AddressInfoMapper">
+
+    <select id="queryAllAddressInfoByUserId" resultType="addressInfo">
+        select * from second_hand_market.addressinfo
+        where userId =#{userId}
+    </select>
+
+    <select id="queryDefaultAddressInfo" parameterType="int" resultType="addressInfo">
+        select *
+        from second_hand_market.addressinfo
+        where isDefaultAddress = true
+    </select>
+
+    <select id="queryAddressInfById" parameterType="int" resultType="addressInfo">
+        select * from second_hand_market.addressinfo
+        where id = #{id}
+    </select>
+
+    <insert id="addAddressInfo" parameterType="addressInfo">
+        insert into second_hand_market.addressinfo (userId,consigneeName,address,houseNo,phone,isDefaultAddress)
+        values (#{userId},#{consigneeName},#{address},#{houseNo},#{phone},#{isDefaultAddress});
+    </insert>
+
+    <update id="cancelDefault">
+        update second_hand_market.addressinfo
+        set isDefaultAddress = false
+        where isDefaultAddress = true
+    </update>
+
+    <update id="setDefault" parameterType="int">
+        update second_hand_market.addressinfo
+        set isDefaultAddress = true
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAddressInfo" parameterType="int">
+        delete from second_hand_market.addressinfo
+        where id = #{id}
+    </delete>
+</mapper>
