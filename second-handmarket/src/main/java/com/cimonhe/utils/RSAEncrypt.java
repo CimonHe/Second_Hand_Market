@@ -21,12 +21,12 @@ public class RSAEncrypt {
 	private static final Map<Integer, String> keyMap = new HashMap<>();  //用于封装随机产生的公钥与私钥
 
 	public static void main(String[] args) throws Exception {
-		String message = "123456";
+		String message = "1234567";
 		System.out.println("随机生成的公钥为:" + publicKey);
 		System.out.println("随机生成的私钥为:" + privateKey);
 		String messageEn = encrypt(message,publicKey);
 		System.out.println(message + "\t加密后的字符串为:" + messageEn);
-		String messageDe = decrypt("KS8XWCoYt1juLlr7YXo3nj+gMH8Wpiq7WVliCvJ2hJNWKKNT56sE9R7UUVS3JMAD1cciQhUdZT8BJFbqDksrSFzmYKZs7GNFVtbOqGKfpq5DtNNVHyd5pd9466iLKKrI2B5OJy9UOWUssLJapCKDwIrO0GyEdP1wZmm1a7vUmZc=",privateKey);
+		String messageDe = decrypt(messageEn,privateKey);
 		System.out.println("还原后的字符串为:" + messageDe);
 
 	}

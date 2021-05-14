@@ -44,7 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String uri = request.getRequestURI();
 
-        User user = null;
+        User user;
 
         String username = null;
         String jwt = null;

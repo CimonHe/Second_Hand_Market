@@ -2,6 +2,7 @@ package com.cimonhe;
 
 import com.cimonhe.mapper.UserMapper;
 import com.cimonhe.pojo.User;
+import com.cimonhe.utils.ContextSafe;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +46,10 @@ public class UserTest {
     private String publicKey ;
     @Test
     public void test(){
-        System.out.println(privateKey);
+        try {
+            ContextSafe.detection("本校小额贷款，安全、快捷、方便、无抵押，随机随贷，当天放款，上门服务");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

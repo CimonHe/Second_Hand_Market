@@ -522,11 +522,12 @@ public class UserController {
             System.out.println("price"+price);
             System.out.println("sellerId"+sellerId);
             System.out.println("sellerPhone"+sellerPhone);
-            for (int tagsId : tagsIds) {
-                System.out.println("tagsIds"+tagsId);
-            }
             Goods goods = new Goods(goodsInfo,price,sellerId,sellerPhone);
             goodsService.addGoods(goods);
+            for (int tagsId : tagsIds) {
+                System.out.println("tagsIds"+tagsId);
+                tag_goodsService.addTag_Goods(new Tag_Goods(tagsId,goods.getId()));
+            }
             String path = "C:\\second_hand_market"+"/goods/"+goods.getId()+"/";
             File realPath = new File(path);
             if (!realPath.exists())
@@ -722,12 +723,21 @@ public class UserController {
             @ApiImplicitParam(name = "goodsId", value = "商品id", required = true, dataType = "int",paramType="query"),
             @ApiImplicitParam(name = "content", value = "留言内容", required = true, dataType = "int",paramType="query"),
     })
-    public String addMsg(HttpServletRequest request,@RequestParam int goodsId,@RequestParam String content){
+    public String addMsg(HttpServletRequest request,@RequestParam int goodsId,@RequestParam String content) throws Exception {
         JSONObject returnValue = new JSONObject();
         User user = jwtUtil.getUserByReq(request);
-        msgService.addMsg(new Msg(goodsId,content, new Date(),user.getId()));
-        returnValue.put(ReturnValueConstant.STATUS,ReturnValueConstant.SUCCESS);
-        returnValue.put(ReturnValueConstant.MSG,"添加留言成功");
+        String detectionResult = ContextSafe.detection(content);
+        if (detectionResult=="normal")
+        {
+            msgService.addMsg(new Msg(goodsId,content, new Date(),user.getId()));
+            returnValue.put(ReturnValueConstant.STATUS,ReturnValueConstant.SUCCESS);
+            returnValue.put(ReturnValueConstant.MSG,"添加留言成功");
+        }
+        else
+        {
+            returnValue.put(ReturnValueConstant.STATUS,ReturnValueConstant.FAIL);
+            returnValue.put(ReturnValueConstant.MSG,"由于留言违规,添加留言失败 违规类型:"+detectionResult);
+        }
         return returnValue.toString();
     }
 
@@ -1255,7 +1265,7 @@ public class UserController {
             URLFileMap.upPortrait(user.getId(),newPortrait);
             returnValue.put(ReturnValueConstant.STATUS,ReturnValueConstant.SUCCESS);
             returnValue.put(ReturnValueConstant.MSG,"更新用户头像成功");
-            returnValue.put("portraitPath",URLFileMap.getPortraitUrlPath(user.getId()));
+            returnValue.put("portraitPath",URLFileMap.getPortraitImgPath(user.getId()));
 
         }
         return returnValue.toString();

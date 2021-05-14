@@ -20,7 +20,7 @@
         where id = #{goodsId}
     </select>
 
-    <select id="queryOnSaleGoodsBySellerId" parameterType="int">
+    <select id="queryOnSaleGoodsBySellerId" parameterType="int" resultType="goods">
         select *
         from second_hand_market.goods
         where sellerId = #{sellerId} and pendingStatus = 1 and isOnSale = true
